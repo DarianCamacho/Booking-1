@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using m = Booking.Model;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
@@ -29,6 +30,25 @@ namespace Booking.DatabaseHelper
             return ExecuteQuery("[dbo].[spGetResort]", param);
         }
 
+
+        public void SaveBooking(m.Book book)
+        {
+            List<SqlParameter> param = new List<SqlParameter>()
+            {
+                new SqlParameter("@BookId", book.Id),
+                new SqlParameter("@Email", book.Session.email),
+                new SqlParameter("@Checkin", book.Checkin),
+                new SqlParameter("@Checkout", book.Checkout),
+                new SqlParameter("@Adults", book.Adults),
+                new SqlParameter("@Kids", book.Kids),
+                new SqlParameter("@Nights", book.Nights),
+                new SqlParameter("@Cost", book.Cost),
+                new SqlParameter("@Total", book.Total),
+            };
+
+            ExecuteQuery("[dbo].[spSaveBooking]", param);
+        }
+
         public DataTable ExecuteQuery(string storedProcedure, List<SqlParameter> param)
         {
             try
@@ -44,13 +64,11 @@ namespace Booking.DatabaseHelper
 
                     if (param != null)
                     {
-                        foreach(SqlParameter p in param)
+                        foreach (SqlParameter p in param)
                         {
                             cmd.Parameters.Add(p);
                         }
                     }
-
-                    cmd.ExecuteNonQuery();
 
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                     adapter.Fill(ds);
@@ -58,7 +76,7 @@ namespace Booking.DatabaseHelper
 
                 return ds;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

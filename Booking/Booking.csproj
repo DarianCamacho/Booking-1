@@ -73,6 +73,7 @@
     <Content Include="css\resorts.css" />
     <Content Include="DatabaseHelper\StoreProcedures\1. spGetResorts.sql" />
     <Content Include="DatabaseHelper\StoreProcedures\2. spGetResort.sql" />
+    <Content Include="DatabaseHelper\StoreProcedures\3.SaveBooking.sql" />
     <Content Include="Images\1.jpg" />
     <Content Include="Images\2.jpg" />
     <Content Include="Images\3.jpg" />

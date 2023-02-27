@@ -10,9 +10,9 @@ namespace Booking.Controller
     {
         public void SaveBook(m.Book book)
         {
-            //TO-DO
+            DatabaseHelper.Database db = new DatabaseHelper.Database();
 
-            //Database Conexion             
+            db.SaveBooking(book);         
         }
     }
 }
